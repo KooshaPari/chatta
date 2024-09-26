@@ -5,7 +5,7 @@
 
 	async function login() {
 		const response = await fetch(
-			"https://great-awfully-prawn.ngrok-free.app/login",
+			"http://great-awfully-prawn.ngrok-free.app/login",
 			{
 				method: "POST",
 				headers: {

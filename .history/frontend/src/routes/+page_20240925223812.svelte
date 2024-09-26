@@ -14,9 +14,7 @@
 		}
 
 		// Establish WebSocket connection
-		ws = new WebSocket(
-			`ws://great-awfully-prawn.ngrok-free.app/ws?token=${token}`
-		);
+		ws = new WebSocket(`ws://https://great-awfully-prawn.ngrok-free.app/ws?token=${token}`);
 
 		ws.onopen = () => {
 			console.log("Connected to Chatta-CMS");

@@ -4,16 +4,13 @@
 	let error = "";
 
 	async function login() {
-		const response = await fetch(
-			"https://great-awfully-prawn.ngrok-free.app/login",
-			{
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ username, password }),
-			}
-		);
+		const response = await fetch("http://localhost:8081/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ username, password }),
+		});
 
 		const data = await response.json();
 
@@ -36,4 +33,4 @@
 <input bind:value={username} placeholder="Username" />
 <input type="password" bind:value={password} placeholder="Password" />
 <button on:click={login}>Login</button>
-<button on:click={signup}>signup</button>
+<button on:click={'/singup'}>signup</button>
