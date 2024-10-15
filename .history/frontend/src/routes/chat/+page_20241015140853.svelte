@@ -1,3 +1,7 @@
+// Move Imports to a lib.svelte
+// Move webRTC to a libfile
+// Chats should be their own page rather than a JS state change
+// move all functions not used directly and exclusively by /chat to its own lib defs, this incl functions 
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { goto, replaceState } from "$app/navigation";
@@ -19,10 +23,10 @@
 	let receiver: User;
 	let localStream;
 	let remoteStream;
-	let peerConnection: RTCPeerConnection;
+	let peerConnection;
 	let signalingSocket;
 	function openEditModal(msg: Message) {
-		if (msg.senderId !== client?.uuid) {
+		if (msg.SenderID !== client?.uuid) {
 			console.log("Invalid Request.");
 		} else {
 			selectedMessage = { ...msg };
@@ -54,10 +58,10 @@
 	}
 	function deleteMsg(msg: Message) {
 		//	console.log("ON CLOSE: ", selectedMessage);
-		if (msg.senderId !== client?.uuid) {
+		if (msg.SenderID !== client?.uuid) {
 			console.log("Invalid Request.");
 		} else if (ws && msg) {
-			msg.deleted = true;
+			msg.Deleted = true;
 			ws.send(JSON.stringify(msg));
 		}
 	}
@@ -71,42 +75,42 @@
 	let chats: Chat[] = [];
 	let messages: Message[] = [];
 	type User = {
-		username: string;
-		uuid: string;
+		Username: string;
+		UUID: string;
 		//Messages: Message[];
 	};
 
 	type Message = {
-		uuid: string;
-		content: string;
-		channel: string;
-		sentAt: Date;
-		edited: boolean;
-		deleted: boolean;
-		senderId: string;
-		sender: User;
+		UUID: string;
+		Content: string;
+		Channel: string;
+		SentAt: Date;
+		Edited: boolean;
+		Deleted: boolean;
+		SenderID: string;
+		Sender: User;
 	};
 	type Chat = {
-		uuid: string;
-		name: string;
-		type: string;
-		messages: Message[];
-		participants: User[];
+		UUID: string;
+		Name: string;
+		Type: string;
+		Messages: Message[];
+		Participants: User[];
 	};
 	let message: Message = {
-		uuid: "",
-		content: "",
-		channel: "0000",
-		sentAt: new Date(),
-		edited: false,
-		deleted: false,
-		senderId: "",
-		sender: {
-			username: "",
-			uuid: "",
+		UUID: "",
+		Content: "",
+		Channel: "0000",
+		SentAt: new Date(),
+		Edited: false,
+		Deleted: false,
+		SenderID: "",
+		Sender: {
+			Username: "",
+			UUID: "",
 		},
 	};
-	let ws: WebSocket;
+	let ws;
 	let client: User;
 
 	onMount(async () => {
@@ -171,13 +175,13 @@
 	});
 	//console.log("ARR", messages);
 	function sendMessage() {
-		if (ws && message.content.trim() !== "") {
+		if (ws && message.Content.trim() !== "") {
 			//console.log("MSG PRESEND: ", message);
-			message.edited = false;
-			message.deleted = false;
-			message.channel = wsChannel;
+			message.Edited = false;
+			message.Deleted = false;
+			message.Channel = wsChannel;
 			ws.send(JSON.stringify(message));
-			message.content = "";
+			message.Content = "";
 		}
 	}
 	async function switchChannel(chat: Chat) {
@@ -195,11 +199,11 @@
 	async function directMessage(sender: User) {
 		// check for an existing chatDM first, (figure out how to actually do this)
 		const newDM: Chat = {
-			uuid: "",
-			name: sender.username,
-			type: "dm",
-			messages: [],
-			participants: [client, sender],
+			UUID: "",
+			Name: sender.Username,
+			Type: "dm",
+			Messages: [],
+			Participants: [client, sender],
 		};
 		let response = await fetch("http://localhost:8081/dm", {
 			method: "POST",
@@ -227,12 +231,11 @@
 	}
 	function createThread() {
 		if (ws && selectedMessage) {
-			let newChat: Chat = {
-				uuid: "",
-				name: selectedMessage.content,
-				type: "thread",
-				messages: [selectedMessage],
-				participants: [],
+			let newChat: chat = {
+				UUID: "",
+				Name: selectedMessage.content,
+				Type: "thread",
+				Messages: [selectedMessage],
 			};
 
 			// api post to /thread?
@@ -261,10 +264,10 @@
 		}
 	}
 	function editMessage() {
-		if (selectedMessage?.senderId !== client?.uuid) {
+		if (selectedMessage.SenderID !== client?.uuid) {
 			console.log("Invalid Request.");
 		} else if (ws && selectedMessage) {
-			selectedMessage.edited = true;
+			selectedMessage.Edited = true;
 			ws.send(JSON.stringify(selectedMessage));
 		}
 		closeEditModal();
@@ -300,15 +303,6 @@
 	}
 </script>
 
-<!--
-// Move Imports to a lib.svelte // Move webRTC to a libfile // Chats should be
-their own page rather than a JS state change // move all functions not used
-directly and exclusively by /chat to its own lib defs, // this incl functions
-that perform MORE than an API caller // Streamline objects, encapsulate and
-seperate User / Client structs as well as msg/chat to enhance
-security/encapsulation //Clean up code/CSS, create responsivity // Harden
-sockets/routing, parameterized entry, hub & spoke socketing // create physical
-RTC handshake //-->
 <h1>Chatta!</h1>
 
 <div class="chattaApp">
@@ -382,14 +376,10 @@ RTC handshake //-->
 
 		<div class="dm-window">
 			{#if currentChat && (currentChat.type === "dm" || currentChat.type === "gc")}
-				<StatusBar
-					onCall={Call(client, receiver)}
-					onVideo={Call(client, receiver)}
-					chatName="Test"
-				/>
+				<StatusBar onCall={Call()} onVideo={Call()} chatName="Test" />
 			{/if}
 			<div class="chat-window">
-				<VideoModal isOpen={onCall} on:close={() => closeCall()}
+				<VideoModal isOpen={onCall} on:close={closeCall()}
 					><h1>Video Call</h1>
 					<video id="localVideo" autoplay playsinline></video>
 					<video id="remoteVideo" autoplay playsinline></video>
@@ -454,7 +444,7 @@ RTC handshake //-->
 
 		<div class="sendContainer">
 			<input
-				bind:value={message.content}
+				bind:value={message.Content}
 				class="sendBar"
 				placeholder="Type a message..."
 				on:keydown={(event) => {

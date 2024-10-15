@@ -22,7 +22,7 @@
 	let peerConnection: RTCPeerConnection;
 	let signalingSocket;
 	function openEditModal(msg: Message) {
-		if (msg.senderId !== client?.uuid) {
+		if (msg.SenderID !== client?.uuid) {
 			console.log("Invalid Request.");
 		} else {
 			selectedMessage = { ...msg };
@@ -177,7 +177,7 @@
 			message.deleted = false;
 			message.channel = wsChannel;
 			ws.send(JSON.stringify(message));
-			message.content = "";
+			message.Content = "";
 		}
 	}
 	async function switchChannel(chat: Chat) {
@@ -195,11 +195,11 @@
 	async function directMessage(sender: User) {
 		// check for an existing chatDM first, (figure out how to actually do this)
 		const newDM: Chat = {
-			uuid: "",
-			name: sender.username,
-			type: "dm",
-			messages: [],
-			participants: [client, sender],
+			UUID: "",
+			Name: sender.Username,
+			Type: "dm",
+			Messages: [],
+			Participants: [client, sender],
 		};
 		let response = await fetch("http://localhost:8081/dm", {
 			method: "POST",
@@ -227,12 +227,11 @@
 	}
 	function createThread() {
 		if (ws && selectedMessage) {
-			let newChat: Chat = {
-				uuid: "",
-				name: selectedMessage.content,
-				type: "thread",
-				messages: [selectedMessage],
-				participants: [],
+			let newChat: chat = {
+				UUID: "",
+				Name: selectedMessage.content,
+				Type: "thread",
+				Messages: [selectedMessage],
 			};
 
 			// api post to /thread?
@@ -261,10 +260,10 @@
 		}
 	}
 	function editMessage() {
-		if (selectedMessage?.senderId !== client?.uuid) {
+		if (selectedMessage.SenderID !== client?.uuid) {
 			console.log("Invalid Request.");
 		} else if (ws && selectedMessage) {
-			selectedMessage.edited = true;
+			selectedMessage.Edited = true;
 			ws.send(JSON.stringify(selectedMessage));
 		}
 		closeEditModal();
@@ -382,14 +381,10 @@ RTC handshake //-->
 
 		<div class="dm-window">
 			{#if currentChat && (currentChat.type === "dm" || currentChat.type === "gc")}
-				<StatusBar
-					onCall={Call(client, receiver)}
-					onVideo={Call(client, receiver)}
-					chatName="Test"
-				/>
+				<StatusBar onCall={Call()} onVideo={Call()} chatName="Test" />
 			{/if}
 			<div class="chat-window">
-				<VideoModal isOpen={onCall} on:close={() => closeCall()}
+				<VideoModal isOpen={onCall} on:close={closeCall()}
 					><h1>Video Call</h1>
 					<video id="localVideo" autoplay playsinline></video>
 					<video id="remoteVideo" autoplay playsinline></video>
@@ -454,7 +449,7 @@ RTC handshake //-->
 
 		<div class="sendContainer">
 			<input
-				bind:value={message.content}
+				bind:value={message.Content}
 				class="sendBar"
 				placeholder="Type a message..."
 				on:keydown={(event) => {

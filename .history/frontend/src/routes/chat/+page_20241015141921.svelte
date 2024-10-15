@@ -287,7 +287,7 @@
 					.forEach((track) => peerConnection.addTrack(track, stream));
 				peerConnection.ontrack = (event) => {
 					remoteStream = event.streams[0];
-					document.querySelector("#remoteVideo").srcObject = remoteStream;
+					`1document.querySelector("#remoteVideo").srcObject = remoteStream;
 				};
 			});
 		// Init Peer Conection, Handle ICEing, Create and Send Offer Singal

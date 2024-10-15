@@ -454,7 +454,7 @@ RTC handshake //-->
 
 		<div class="sendContainer">
 			<input
-				bind:value={message.content}
+				bind:value={message.Content}
 				class="sendBar"
 				placeholder="Type a message..."
 				on:keydown={(event) => {

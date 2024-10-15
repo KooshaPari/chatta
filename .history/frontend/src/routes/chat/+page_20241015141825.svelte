@@ -389,7 +389,7 @@ RTC handshake //-->
 				/>
 			{/if}
 			<div class="chat-window">
-				<VideoModal isOpen={onCall} on:close={() => closeCall()}
+				<VideoModal isOpen={onCall} on:close={closeCall()}
 					><h1>Video Call</h1>
 					<video id="localVideo" autoplay playsinline></video>
 					<video id="remoteVideo" autoplay playsinline></video>
@@ -454,7 +454,7 @@ RTC handshake //-->
 
 		<div class="sendContainer">
 			<input
-				bind:value={message.content}
+				bind:value={message.Content}
 				class="sendBar"
 				placeholder="Type a message..."
 				on:keydown={(event) => {
