@@ -1,5 +1,6 @@
 <script>
 	export let data;
+	export const prerender = true;
 </script>
 
 <nav>

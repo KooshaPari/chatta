@@ -22,7 +22,7 @@
 	let peerConnection: RTCPeerConnection;
 	let signalingSocket;
 	function openEditModal(msg: Message) {
-		if (msg.senderId !== client?.uuid) {
+		if (msg.SenderID != client?.uuid) {
 			console.log("Invalid Request.");
 		} else {
 			selectedMessage = { ...msg };
@@ -54,7 +54,7 @@
 	}
 	function deleteMsg(msg: Message) {
 		//	console.log("ON CLOSE: ", selectedMessage);
-		if (msg.senderId !== client?.uuid) {
+		if (msg.SenderID != client?.uuid) {
 			console.log("Invalid Request.");
 		} else if (ws && msg) {
 			msg.deleted = true;
@@ -269,6 +269,7 @@
 		}
 		closeEditModal();
 	}
+	/*
 	function closeCall() {
 		onCall = false;
 	}
@@ -297,7 +298,7 @@
 		//  Based on type create appropriate data obj ands end it to the signal socket(ws server)
 		// candidates iwll be new ice candidates, while answers will be handled in your RTC-SDescr
 		// On Mount ensure that a routine is started for this function.
-	}
+	}*/
 </script>
 
 <!--
@@ -309,6 +310,7 @@ seperate User / Client structs as well as msg/chat to enhance
 security/encapsulation //Clean up code/CSS, create responsivity // Harden
 sockets/routing, parameterized entry, hub & spoke socketing // create physical
 RTC handshake //-->
+
 <h1>Chatta!</h1>
 
 <div class="chattaApp">
@@ -381,21 +383,21 @@ RTC handshake //-->
 		</Modal>
 
 		<div class="dm-window">
-			{#if currentChat && (currentChat.type === "dm" || currentChat.type === "gc")}
+			<!--{#if currentChat && (currentChat.type === "dm" || currentChat.type === "gc")}
 				<StatusBar
 					onCall={Call(client, receiver)}
 					onVideo={Call(client, receiver)}
 					chatName="Test"
 				/>
-			{/if}
+			{/if}-->
 			<div class="chat-window">
-				<VideoModal isOpen={onCall} on:close={() => closeCall()}
+				<!--<VideoModal isOpen={onCall} on:close={() => closeCall()}
 					><h1>Video Call</h1>
 					<video id="localVideo" autoplay playsinline></video>
 					<video id="remoteVideo" autoplay playsinline></video>
 
 					<button on:click={() => Call(client, receiver)}>Start Call</button>
-				</VideoModal>
+				</VideoModal>-->
 				{#if messages?.length > 0}
 					<div class="texts">
 						{#each messages as msg, index}

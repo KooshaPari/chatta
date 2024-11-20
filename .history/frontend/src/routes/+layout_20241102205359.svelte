@@ -1,6 +1,5 @@
 <script>
 	export let data;
-	export const prerender = true;
 </script>
 
 <nav>
@@ -10,3 +9,4 @@
 </nav>
 
 <slot />
+export const prerender = true
