@@ -9,12 +9,12 @@
 	onMount(() => {
 		const token = localStorage.getItem("token");
 		if (!token) {
-			goto("/login");
+			goto("/backend/login");
 			return;
 		}
 
 		// Establish WebSocket connection
-		ws = new WebSocket(`ws://localhost:8081/ws?token=${token}`);
+		ws = new WebSocket(`${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}/backend/ws?token=${token}`);
 
 		ws.onopen = () => {
 			console.log("Connected to Chatta-CMS");
