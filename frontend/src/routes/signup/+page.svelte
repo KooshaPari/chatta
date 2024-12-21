@@ -4,7 +4,7 @@
 	let error = "";
 
 	async function signup() {
-		const response = await fetch("http://localhost:8081/signup", {
+		const response = await fetch("/backend/signup", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -17,7 +17,7 @@
 		if (response.ok) {
 			// Save the token and redirect to chat
 			localStorage.setItem("token", data.token);
-			window.location.href = "/chat";
+			window.location.href = "/backend/chat";
 		} else {
 			error = data.error;
 		}
