@@ -5,7 +5,7 @@
 	let error = "";
 
 	async function login() {
-		const response = await fetch("http://localhost:8081/login", {
+		const response = await fetch("/backend/login", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -21,7 +21,7 @@
 			user.set(data.user);
 			console.log("LOGGING USER: ", $user.username);
 			localStorage.setItem("user", JSON.stringify(data.user));
-			window.location.href = "/chat";
+			window.location.href = "/backend/chat";
 		} else {
 			error = data.error;
 		}
