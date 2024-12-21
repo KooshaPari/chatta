@@ -50,7 +50,7 @@
 	}
 	function closeThreadModal() {
 		showThreadModal = false;
-		goto("/chat", { replaceState: true });
+		goto("/backend/chat", { replaceState: true });
 	}
 	function deleteMsg(msg: Message) {
 		//	console.log("ON CLOSE: ", selectedMessage);
@@ -66,7 +66,7 @@
 		localStorage.removeItem("token");
 		localStorage.removeItem("user");
 		user.set(null);
-		goto("/login");
+		goto("/backend/login");
 	}
 	let chats: Chat[] = [];
 	let messages: Message[] = [];
@@ -114,28 +114,28 @@
 		const token = localStorage.getItem("token");
 		const userString = localStorage.getItem("user");
 		if (!userString || !token) {
-			goto("/login");
+			goto("/backend/login");
 		}
 		if (userString) {
 			client = JSON.parse(userString) as User;
 		}
 		if (!token) {
-			goto("/login");
+			goto("/backend/login");
 			return;
 		}
-		const msgresponse = await fetch("http://localhost:8081/messages");
+		const msgresponse = await fetch("/backend/messages");
 
 		if (msgresponse.ok) {
 			const data = await msgresponse.json();
 			messages = data;
 		}
-		const chatresponse = await fetch("http://localhost:8081/chats");
+		const chatresponse = await fetch("/backend/chats");
 		if (chatresponse.ok) {
 			const data = await chatresponse.json();
 			chats = data;
 		}
 		// Establish WebSocket connection
-		ws = new WebSocket(`ws://localhost:8081/ws?token=${token}`);
+		ws = new WebSocket(`${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}/backend/ws?token=${token}`);
 
 		ws.onopen = () => {
 			console.log("Connected to Chatta-CMS");
@@ -183,7 +183,7 @@
 	async function switchChannel(chat: Chat) {
 		wsChannel = chat.uuid;
 
-		const newmessages = await fetch(`http://localhost:8081/chats/${chat.uuid}`);
+		const newmessages = await fetch(`/backend/chats/${chat.uuid}`);
 
 		if (newmessages.ok) {
 			const data = await newmessages.json();
@@ -201,7 +201,7 @@
 			messages: [],
 			participants: [client, sender],
 		};
-		let response = await fetch("http://localhost:8081/dm", {
+		let response = await fetch("/backend/dm", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(newDM),
@@ -239,7 +239,7 @@
 			console.log(newChat);
 			const token = localStorage.getItem("token");
 
-			fetch("http://localhost:8081/thread", {
+			fetch("/backend/thread", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
