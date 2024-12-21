@@ -57,18 +57,18 @@ initDB()
 app := fiber.New()
 
 app.Use(cors.New(cors.Config{
-	AllowOrigins:  "http://localhost:8080, http://localhost:8081,https://chatta-kooshapari-koosha-paridehpours-projects.vercel.app",
+	AllowOrigins:  "http://*:8080, http://*:8081",
 }))
-app.Post("/login", login)
-app.Post("/signup", signup)
-app.Post("/thread", createThread)
+app.Post("/backend/login", login)
+app.Post("/backend/signup", signup)
+app.Post("/backend/thread", createThread)
 app.Get("/messages",getMessages)
-app.Get("/chats",getChats)
-app.Get("/chats/:uuid",getChat)
-app.Post("/dm",getDM)
+app.Get("/backend/chats",getChats)
+app.Get("/backend/chats/:uuid",getChat)
+app.Post("/backend/dm",getDM)
 
 // WebSocket route
-app.Get("/ws", websocket.New(func(c *websocket.Conn) {
+app.Get("/backend/ws", websocket.New(func(c *websocket.Conn) {
 		// Get the token from the query string
 		token := c.Query("token")
 		
@@ -196,7 +196,7 @@ app.Get("/ws", websocket.New(func(c *websocket.Conn) {
 	// WebSocket route with authentication
     app.Use(func(c *fiber.Ctx) error {
         // Bypass authentication for login route
-        if c.Path() == "/login" {
+        if c.Path() == "/backend/login" {
             return c.Next()
         }
 
