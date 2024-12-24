@@ -9,7 +9,7 @@
 	onMount(() => {
 		const token = localStorage.getItem("token");
 		if (!token) {
-			goto("/backend/login");
+			goto("/login");
 			return;
 		}
 
