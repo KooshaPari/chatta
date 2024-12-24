@@ -17,7 +17,7 @@
 		if (response.ok) {
 			// Save the token and redirect to chat
 			localStorage.setItem("token", data.token);
-			window.location.href = "/backend/chat";
+			window.location.href = "/chat";
 		} else {
 			error = data.error;
 		}
