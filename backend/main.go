@@ -57,7 +57,7 @@ initDB()
 app := fiber.New()
 
 app.Use(cors.New(cors.Config{
-	AllowOrigins:  "http://*:8080, http://*:8081",
+    AllowOrigins: "http://localhost:8080, http://localhost:8081",
 }))
 app.Post("/backend/login", login)
 app.Post("/backend/signup", signup)
