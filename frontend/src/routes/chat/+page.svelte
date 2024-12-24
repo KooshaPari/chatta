@@ -50,7 +50,7 @@
 	}
 	function closeThreadModal() {
 		showThreadModal = false;
-		goto("/backend/chat", { replaceState: true });
+		goto("/chat", { replaceState: true });
 	}
 	function deleteMsg(msg: Message) {
 		//	console.log("ON CLOSE: ", selectedMessage);
@@ -66,7 +66,7 @@
 		localStorage.removeItem("token");
 		localStorage.removeItem("user");
 		user.set(null);
-		goto("/backend/login");
+		goto("/login");
 	}
 	let chats: Chat[] = [];
 	let messages: Message[] = [];
@@ -114,13 +114,13 @@
 		const token = localStorage.getItem("token");
 		const userString = localStorage.getItem("user");
 		if (!userString || !token) {
-			goto("/backend/login");
+			goto("/login");
 		}
 		if (userString) {
 			client = JSON.parse(userString) as User;
 		}
 		if (!token) {
-			goto("/backend/login");
+			goto("/login");
 			return;
 		}
 		const msgresponse = await fetch("/backend/messages");
