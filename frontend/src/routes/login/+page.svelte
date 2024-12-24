@@ -21,7 +21,7 @@
 			user.set(data.user);
 			console.log("LOGGING USER: ", $user.username);
 			localStorage.setItem("user", JSON.stringify(data.user));
-			window.location.href = "/backend/chat";
+			window.location.href = "/chat";
 		} else {
 			error = data.error;
 		}
