@@ -1,11 +1,5 @@
 # CHATTA!
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Build](https://github.com/KooshaPari/chatta/actions/workflows/build.yml/badge.svg)](https://github.com/KooshaPari/chatta/actions/workflows/build.yml)
-[![TypeScript](https://img.shields.io/badge/typescript-5.x-3178C6.svg?logo=typescript&logoColor=white)](package.json)
-
-**Status:** alpha
-
 **Real-Time Peer-to-Peer Chat** — A WebRTC-based messaging application for direct communication with message threads, group chat, and per-user privacy controls.
 
 ## Overview
@@ -200,7 +194,7 @@ fly deploy
 
 ## License
 
-MIT — see [LICENSE](./LICENSE).
+MIT — See LICENSE file for details.
 
 ---
 
