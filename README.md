@@ -196,7 +196,7 @@ fly deploy
 
 ## License
 
-MIT — See LICENSE file for details.
+MIT — see [LICENSE](./LICENSE).
 
 ---
 
