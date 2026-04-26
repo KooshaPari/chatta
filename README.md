@@ -1,5 +1,7 @@
 # CHATTA!
 
+**Status:** alpha
+
 **Real-Time Peer-to-Peer Chat** — A WebRTC-based messaging application for direct communication with message threads, group chat, and per-user privacy controls.
 
 ## Overview
