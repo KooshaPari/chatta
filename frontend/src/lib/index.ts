@@ -1,1 +1,4 @@
-// place files you want to import through the `$lib` alias in this folder.
+// Barrel export for chatta frontend lib
+// Re-export all public modules
+
+export * from './stores';
