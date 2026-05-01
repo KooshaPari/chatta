@@ -3,6 +3,7 @@
 	import { goto, replaceState } from "$app/navigation";
 	import { faEdit } from "@fortawesome/free-solid-svg-icons";
 	import { user } from "../../stores/user";
+	import { user as libUser, type Chat, type Message, type User } from "$lib";
 	import { Modal, Sidebar } from "../../components";
 	import { fly, fade } from "svelte/transition";
 	import StatusBar from "../../components/StatusBar.svelte";
@@ -22,7 +23,7 @@
 	let peerConnection: RTCPeerConnection;
 	let signalingSocket;
 	function openEditModal(msg: Message) {
-		if (msg.SenderID != client?.uuid) {
+		if (msg.senderId != client?.uuid) {
 			console.log("Invalid Request.");
 		} else {
 			selectedMessage = { ...msg };
@@ -54,7 +55,7 @@
 	}
 	function deleteMsg(msg: Message) {
 		//	console.log("ON CLOSE: ", selectedMessage);
-		if (msg.SenderID != client?.uuid) {
+		if (msg.senderId != client?.uuid) {
 			console.log("Invalid Request.");
 		} else if (ws && msg) {
 			msg.deleted = true;
@@ -70,29 +71,7 @@
 	}
 	let chats: Chat[] = [];
 	let messages: Message[] = [];
-	type User = {
-		username: string;
-		uuid: string;
-		//Messages: Message[];
-	};
 
-	type Message = {
-		uuid: string;
-		content: string;
-		channel: string;
-		sentAt: Date;
-		edited: boolean;
-		deleted: boolean;
-		senderId: string;
-		sender: User;
-	};
-	type Chat = {
-		uuid: string;
-		name: string;
-		type: string;
-		messages: Message[];
-		participants: User[];
-	};
 	let message: Message = {
 		uuid: "",
 		content: "",

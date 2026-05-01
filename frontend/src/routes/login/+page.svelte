@@ -19,7 +19,7 @@
 			// Save the token and redirect to chat
 			localStorage.setItem("token", data.token);
 			user.set(data.user);
-			console.log("LOGGING USER: ", $user.username);
+			console.log("LOGGING USER: ", data.user.username);
 			localStorage.setItem("user", JSON.stringify(data.user));
 			window.location.href = "/chat";
 		} else {
