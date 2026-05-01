@@ -1,20 +1,20 @@
-<script>
-	import { createEventDispatcher, onMount, onDestroy } from "svelte";
-	import { fade, scale, fly } from "svelte/transition";
+<script lang="ts">
+	import { createEventDispatcher, onMount } from "svelte";
+	import { fly } from "svelte/transition";
 	import { tick } from "svelte";
 
 	export let isOpen = false;
 	export let closeOnOverlayClick = true;
 
 	const dispatch = createEventDispatcher();
-	let sidebarContent;
-	let previouslyFocusedElement;
+	let sidebarContent: HTMLElement | undefined;
+	let previouslyFocusedElement: HTMLElement | null = null;
 
 	function closesidebar() {
 		dispatch("close");
 	}
 
-	function handleKeyDown(event) {
+	function handleKeyDown(event: KeyboardEvent) {
 		if (event.key === "Escape") {
 			closesidebar();
 		}
@@ -22,10 +22,10 @@
 
 	onMount(() => {
 		if (isOpen) {
-			previouslyFocusedElement = document.activeElement;
+			previouslyFocusedElement = document.activeElement as HTMLElement;
 			window.addEventListener("keydown", handleKeyDown);
 			tick().then(() => {
-				sidebarContent.focus();
+				sidebarContent?.focus();
 			});
 		}
 		return () => {

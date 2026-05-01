@@ -1,5 +1,5 @@
-<script>
-	import { createEventDispatcher, onMount, onDestroy } from "svelte";
+<script lang="ts">
+	import { createEventDispatcher, onMount } from "svelte";
 	import { fade, scale } from "svelte/transition";
 	import { tick } from "svelte";
 
@@ -7,14 +7,14 @@
 	export let closeOnOverlayClick = true;
 
 	const dispatch = createEventDispatcher();
-	let modalContent;
-	let previouslyFocusedElement;
+	let modalContent: HTMLElement | undefined;
+	let previouslyFocusedElement: HTMLElement | null = null;
 
 	function closeModal() {
 		dispatch("close");
 	}
 
-	function handleKeyDown(event) {
+	function handleKeyDown(event: KeyboardEvent) {
 		if (event.key === "Escape") {
 			closeModal();
 		}
@@ -22,10 +22,10 @@
 
 	onMount(() => {
 		if (isOpen) {
-			previouslyFocusedElement = document.activeElement;
+			previouslyFocusedElement = document.activeElement as HTMLElement;
 			window.addEventListener("keydown", handleKeyDown);
 			tick().then(() => {
-				modalContent.focus();
+				modalContent?.focus();
 			});
 		}
 		return () => {

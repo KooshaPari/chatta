@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
 	import { onMount } from "svelte";
 	import { goto } from "$app/navigation";
 
-	let messages = [];
+	let messages: string[] = [];
 	let message = "";
-	let ws;
+	let ws: WebSocket | null = null;
 
 	onMount(() => {
 		const token = localStorage.getItem("token");
@@ -20,7 +20,7 @@
 			console.log("Connected to Chatta-CMS");
 		};
 
-		ws.onmessage = (event) => {
+		ws.onmessage = (event: MessageEvent) => {
 			messages = [...messages, event.data];
 		};
 
