@@ -2,20 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
-
-### Added
-
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
-
 ## 📚 Documentation
 - Docs(worklog): initialize first-entry bootstrap (`b3d5530`)
 - Docs(fr): scaffold FUNCTIONAL_REQUIREMENTS.md with 2 FR stubs (`7bf2381`)
