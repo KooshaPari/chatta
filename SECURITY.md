@@ -1,15 +1,11 @@
 # Security Policy
 
+## Reporting a Vulnerability
+
+Please report security vulnerabilities by opening a GitHub Issue or contacting the maintainers directly.
+
 ## Supported Versions
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.x     | :white_check_mark: |
-
-## Reporting a Vulnerability
-
-If you discover a security vulnerability, please report it via:
-- GitHub Security Advisories
-- Or contact the maintainers directly
-
-Please do not disclose security issues publicly until a fix is available.
+| main    | :white_check_mark: |
