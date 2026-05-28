@@ -3,6 +3,7 @@
 	import { goto, replaceState } from "$app/navigation";
 	import { faEdit } from "@fortawesome/free-solid-svg-icons";
 	import { user } from "../../stores/user";
+	import { user as libUser, type Chat, type Message, type User } from "$lib";
 	import { Modal, Sidebar } from "../../components";
 	import { fly, fade } from "svelte/transition";
 	import StatusBar from "../../components/StatusBar.svelte";
@@ -22,7 +23,7 @@
 	let peerConnection: RTCPeerConnection;
 	let signalingSocket;
 	function openEditModal(msg: Message) {
-		if (msg.SenderID != client?.uuid) {
+		if (msg.senderId != client?.uuid) {
 			console.log("Invalid Request.");
 		} else {
 			selectedMessage = { ...msg };
@@ -50,11 +51,11 @@
 	}
 	function closeThreadModal() {
 		showThreadModal = false;
-		goto("/backend/chat", { replaceState: true });
+		goto("/chat", { replaceState: true });
 	}
 	function deleteMsg(msg: Message) {
 		//	console.log("ON CLOSE: ", selectedMessage);
-		if (msg.SenderID != client?.uuid) {
+		if (msg.senderId != client?.uuid) {
 			console.log("Invalid Request.");
 		} else if (ws && msg) {
 			msg.deleted = true;
@@ -66,33 +67,11 @@
 		localStorage.removeItem("token");
 		localStorage.removeItem("user");
 		user.set(null);
-		goto("/backend/login");
+		goto("/login");
 	}
 	let chats: Chat[] = [];
 	let messages: Message[] = [];
-	type User = {
-		username: string;
-		uuid: string;
-		//Messages: Message[];
-	};
 
-	type Message = {
-		uuid: string;
-		content: string;
-		channel: string;
-		sentAt: Date;
-		edited: boolean;
-		deleted: boolean;
-		senderId: string;
-		sender: User;
-	};
-	type Chat = {
-		uuid: string;
-		name: string;
-		type: string;
-		messages: Message[];
-		participants: User[];
-	};
 	let message: Message = {
 		uuid: "",
 		content: "",
@@ -114,13 +93,13 @@
 		const token = localStorage.getItem("token");
 		const userString = localStorage.getItem("user");
 		if (!userString || !token) {
-			goto("/backend/login");
+			goto("/login");
 		}
 		if (userString) {
 			client = JSON.parse(userString) as User;
 		}
 		if (!token) {
-			goto("/backend/login");
+			goto("/login");
 			return;
 		}
 		const msgresponse = await fetch("/backend/messages");

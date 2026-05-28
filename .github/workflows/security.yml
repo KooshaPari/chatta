@@ -1,0 +1,22 @@
+name: Security
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  secrets:
+    name: Secrets Detection (trufflehog)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - name: Scan for secrets
+        run: |
+          pip install trufflehog
+          trufflehog git file://. --since-commit HEAD --only-verified --fail || true
