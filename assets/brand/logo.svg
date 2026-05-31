@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="chatta">
+  <title>chatta</title>
+  <desc>AI-coded vector app mark: two overlapping chat bubbles forming a conversation, the front bubble carrying three typing dots. Hand-authored paths.</desc>
+  <defs>
+    <linearGradient id="ch-back" x1="150" y1="120" x2="380" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F472B6"/>
+      <stop offset="1" stop-color="#A855F7"/>
+    </linearGradient>
+    <linearGradient id="ch-front" x1="120" y1="220" x2="360" y2="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#38BDF8"/>
+      <stop offset="1" stop-color="#6366F1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- App tile -->
+  <rect x="24" y="24" width="464" height="464" rx="108" ry="108" fill="#0C1322"/>
+  <rect x="24" y="24" width="464" height="464" rx="108" ry="108" fill="none" stroke="#1D2840" stroke-width="2"/>
+
+  <!-- Back bubble (the other speaker), with a tail to the upper-right -->
+  <g>
+    <rect x="208" y="96" width="208" height="148" rx="44" fill="url(#ch-back)"/>
+    <path d="M 372 244 L 392 304 L 332 252 Z" fill="url(#ch-back)"/>
+  </g>
+
+  <!-- Front bubble (you), with a tail to the lower-left, overlapping the back -->
+  <g>
+    <rect x="96" y="200" width="232" height="160" rx="48" fill="url(#ch-front)"/>
+    <path d="M 148 360 L 124 420 L 192 356 Z" fill="url(#ch-front)"/>
+  </g>
+
+  <!-- Typing dots on the front bubble -->
+  <g fill="#FFFFFF">
+    <circle cx="160" cy="280" r="18"/>
+    <circle cx="212" cy="280" r="18"/>
+    <circle cx="264" cy="280" r="18"/>
+  </g>
+</svg>
