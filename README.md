@@ -1,3 +1,6 @@
+> **Work state:** SCAFFOLD · **Progress:** `████░░░░░░ 40%`
+> WebRTC P2P chat (Svelte frontend + signaling backend). Alpha; frontend/backend split present, feature depth still shallow. · updated 2026-06-02
+
 # CHATTA!
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
