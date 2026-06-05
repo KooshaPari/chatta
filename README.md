@@ -5,7 +5,7 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Build](https://github.com/KooshaPari/chatta/actions/workflows/build.yml/badge.svg)](https://github.com/KooshaPari/chatta/actions/workflows/build.yml)
-[![TypeScript](https://img.shields.io/badge/typescript-5.x-3178C6.svg?logo=typescript&logoColor=white)](package.json)
+[![TypeScript](https://img.shields.io/badge/typescript-6.x-3178C6.svg?logo=typescript&logoColor=white)](package.json)
 
 **Status:** alpha
 
