@@ -39,7 +39,7 @@ Chatta is a modern, decentralized chat application built on WebRTC technology, e
 
 ```bash
 # Clone and setup
-git clone https://github.com/KooshaPari/Phenotype repos/chatta
+git clone https://github.com/KooshaPari/chatta.git chatta
 cd chatta
 
 # Review governance context
