@@ -2,17 +2,25 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in this repository, please report it via:
+If you discover security vulnerability, please follow the responsible disclosure process:
 
-- GitHub Security Advisories (preferred): use the "Security" tab on this repository to file a private advisory
-- Email: security@kooshapari.com (use only for sensitive reports that cannot use GitHub)
-
-We aim to acknowledge reports within 7 days and provide a remediation timeline within 14 days for confirmed issues.
+1. **Do NOT** open public GitHub issue security vulnerabilities.
+2. Email maintainers directly [maintainer email] GitHub Security Advisories feature.
+3. Provide detailed information, including:
+   - Description issue
+   - Steps reproduce
+   - Potential impact
+   - Any suggested fixes (if applicable)
 
 ## Supported Versions
 
-Active development branches receive security updates. Archived repositories do not.
+| Version | Supported |
+|---------|-----------|
+| 1.0.0   | :white_check_mark: |
+| <1.0.0  | :x: |
 
-## Disclosure
+## Response Timeline
 
-We follow a coordinated disclosure model. Please do not publicly disclose vulnerabilities until a fix is released.
+**Acknowledgment**: Within 48 hours
+**Initial Assessment**: Within 7 days
+**Fix Timeline**: Varies based on severity
