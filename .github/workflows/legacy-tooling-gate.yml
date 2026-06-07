@@ -6,6 +6,13 @@ on:
   pull_request:
     branches: [main, master]
   workflow_dispatch:
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 
 jobs:
   legacy-tooling-scan:
@@ -17,17 +24,17 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5@11bd71901bbe5b1630ceea73d27597364c9af683
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v4@11bd71901bbe5b1630ceea73d27597364c9af683
 
       - name: Checkout phenotype/repos for shared tools
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5@11bd71901bbe5b1630ceea73d27597364c9af683
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v4@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           repository: kooshapari/phenotype
           path: phenotype-repos
           sparse-checkout: tooling/legacy-enforcement
 
       - name: Set up Python
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        uses: actions/setup-python@c8813ba1bc76ebf779b911ad8ffccbf2e449cb48 # v-latest
         with:
           python-version: '3.12'
 
@@ -45,14 +52,14 @@ jobs:
         continue-on-error: true
 
       - name: Upload scan report (JSON)
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v-latest@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: legacy-tooling-report-json
           path: legacy_tooling_report.json
           retention-days: 30
 
       - name: Upload scan report (Markdown)
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v-latest@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: legacy-tooling-report-md
           path: legacy_tooling_report.md

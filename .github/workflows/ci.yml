@@ -1,0 +1,27 @@
+name: CI
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+jobs:
+  ci:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Verify repository
+        run: |
+          test -d .git
+          find . -maxdepth 2 -type f | head -50
