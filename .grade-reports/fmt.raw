@@ -1,0 +1,41 @@
+Checking formatting...
+[[33mwarn[39m] .history/frontend/src/app.d_20240925195716.ts
+[[31merror[39m] .history/frontend/src/app.d_20241001205001.ts: SyntaxError: Expression expected. (12:2)
+[[31merror[39m] [0m [90m 10 |[39m 	}
+[[31merror[39m]  [90m 11 |[39m }
+[[31merror[39m] [31m[1m>[22m[39m[90m 12 |[39m [33m@[39m[36mimport[39m [32m'@fortawesome/fontawesome-free/css/all.min.css'[39m[33m;[39m
+[[31merror[39m]  [90m    |[39m  [31m[1m^[22m[39m
+[[31merror[39m]  [90m 13 |[39m [36mexport[39m {}[33m;[39m
+[[31merror[39m]  [90m 14 |[39m[0m
+[[33mwarn[39m] .history/frontend/src/app.d_20241001205003.ts
+[[31merror[39m] .history/frontend/vite.config_20241220222118.ts: SyntaxError: ',' expected. (5:23)
+[[31merror[39m] [0m [90m 3 |[39m
+[[31merror[39m]  [90m 4 |[39m [36mexport[39m [36mdefault[39m defineConfig({
+[[31merror[39m] [31m[1m>[22m[39m[90m 5 |[39m 	plugins[33m:[39m [sveltekit()sds
+[[31merror[39m]  [90m   |[39m 	                     [31m[1m^[22m[39m
+[[31merror[39m]  [90m 6 |[39m })[33m;[39m
+[[31merror[39m]  [90m 7 |[39m[0m
+[[31merror[39m] .history/frontend/vite.config_20241220222133.ts: SyntaxError: ',' expected. (6:3)
+[[31merror[39m] [0m [90m 4 |[39m [36mexport[39m [36mdefault[39m defineConfig({
+[[31merror[39m]  [90m 5 |[39m 	plugins[33m:[39m [sveltekit()]
+[[31merror[39m] [31m[1m>[22m[39m[90m 6 |[39m 	 preview[33m:[39m {
+[[31merror[39m]  [90m   |[39m 	 [31m[1m^[22m[39m
+[[31merror[39m]  [90m 7 |[39m     host[33m:[39m [32m'0.0.0.0'[39m[33m,[39m
+[[31merror[39m]  [90m 8 |[39m     port[33m:[39m [35m8080[39m[33m,[39m
+[[31merror[39m]  [90m 9 |[39m   }[33m,[39m[0m
+[[33mwarn[39m] .history/frontend/vite.config_20241220222330.ts
+[[33mwarn[39m] .history/frontend/vite.config_20241220222335.ts
+[[33mwarn[39m] frontend/desktop-electrobun/src/main.ts
+[[33mwarn[39m] frontend/src/app.d.ts
+[[33mwarn[39m] frontend/src/lib/api.ts
+[[33mwarn[39m] frontend/src/lib/auth.ts
+[[33mwarn[39m] frontend/src/lib/constants.ts
+[[33mwarn[39m] frontend/src/lib/index.ts
+[[33mwarn[39m] frontend/src/lib/storage.ts
+[[33mwarn[39m] frontend/src/lib/stores.ts
+[[33mwarn[39m] frontend/src/lib/types.ts
+[[33mwarn[39m] frontend/src/lib/utils.ts
+[[33mwarn[39m] frontend/src/lib/websocket.ts
+[[33mwarn[39m] frontend/vite.config.ts
+[[33mwarn[39m] vitest.config.ts
+Error occurred when checking code style in 3 files.
