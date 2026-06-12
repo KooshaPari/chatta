@@ -1,1 +1,28 @@
+# Phenotype-org standard .gitignore — Node
+# Source: https://github.com/KooshaPari/phenotype-tooling/blob/main/templates/gitignore-node
+
 .vercel
+
+# --- adopted from phenotype-tooling/templates/gitignore-node ---
+.cache/
+.DS_Store
+.eslintcache
+.idea/
+.npm/
+.parcel-cache/
+.pnp
+.pnp.js
+.vscode/
+*.log
+*.swp
+/build/
+/coverage/
+/dist/
+/out/
+lerna-debug.log*
+node_modules/
+npm-debug.log*
+pnpm-debug.log*
+Thumbs.db
+yarn-debug.log*
+yarn-error.log*
